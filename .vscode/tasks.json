@@ -13,6 +13,13 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "excute",
+            "type": "shell",
+            "command": "${workspaceFolder}/bin/main",
+            "problemMatcher": [],
+            "group": "build"
         }
     ]
 }
