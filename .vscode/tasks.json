@@ -5,6 +5,16 @@
     "runner": "terminal",
     "tasks": [
         {
+            "label": "c++ build",
+            "type": "shell",
+            "command": "make",
+            "problemMatcher": ["$gcc"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Commit",
             "type": "shell",
             "command": "git add .; git commit -m vscode;git push origin main;",
@@ -13,13 +23,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "label": "excute",
-            "type": "shell",
-            "command": "${workspaceFolder}",
-            "problemMatcher": [],
-            "group": "build"
         }
     ]
 }
