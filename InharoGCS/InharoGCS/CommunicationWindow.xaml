@@ -1,0 +1,258 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InharoGCS"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="InharoGCS.CommunicationWindow"
+        mc:Ignorable="d"
+        Title="CommunicationWindow" Height="500" Width="740" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="SetTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="SetButtonStyle" TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button.Flat}">
+            <Setter Property="FontSize" Value="7.5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <Style x:Key="OptionButtonStyle" TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
+            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="mah:ControlsHelper.ContentCharacterCasing" Value="Normal"/>
+        </Style>
+
+        <Style x:Key="ToggleButtonStyle" TargetType="ToggleButton" BasedOn="{StaticResource MahApps.Styles.ToggleButton.Flat}">
+            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+
+        <VisualBrush x:Key="HatchBrush" TileMode="Tile"
+                 Viewport="0,0,5,5" ViewportUnits="Absolute"
+                 Viewbox="0,0,5,5" ViewboxUnits="Absolute">
+            <VisualBrush.Visual>
+                <Path Data="M 0 5 L 5 0 M -2 2 L 2 -2 M 3 7 L 7 3"
+              Stroke="#8C7D7D7D" StrokeEndLineCap="Square"
+              RenderOptions.EdgeMode="Aliased" />
+            </VisualBrush.Visual>
+        </VisualBrush>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+        <local:HexConverter x:Key="HexConverter"/>
+        <local:DataConverter x:Key="DataConverter"/>
+    </Window.Resources>
+    <Grid  Background="{DynamicResource ColorWindowBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Background="{DynamicResource ColorControl}" Margin="5,5,5,5">
+            <Label Content="Main Connection" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" FontWeight="Bold"/>
+            <mah:MetroTabControl Margin="5,25,5,5">
+                <TabItem Header="Status" mah:HeaderedControlHelper.HeaderFontSize="12">
+                    <Grid Background="{DynamicResource ColorPanel}">
+                        <Label Style="{StaticResource LabelStyle}" Content="Name" Margin="5,10,0,0"/>
+                        <TextBox x:Name="tbName" Style="{StaticResource TextBoxStyle}" Margin="94,15,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="S.N." Margin="5,35,0,0"/>
+                        <TextBox x:Name="tbSerialNumber" Style="{StaticResource TextBoxStyle}" Margin="94,40,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Address(64-bit)" Margin="5,62,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbAddress64" Style="{StaticResource TextBoxStyle}" Margin="94,65,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Address(16-bit)" Margin="5,87,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbAddress16" Style="{StaticResource TextBoxStyle}" Margin="94,90,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Port" Margin="229,10,0,0"/>
+                        <TextBox x:Name="tbPort" Style="{StaticResource TextBoxStyle}" Margin="289,15,0,0"  Width="80" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="PAN ID" Margin="229,35,0,0"/>
+                        <TextBox x:Name="tbPANID" Style="{StaticResource TextBoxStyle}" Margin="289,40,0,0"  Width="80" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Channel" Margin="229,60,0,0"/>
+                        <TextBox x:Name="tbChannel" Style="{StaticResource TextBoxStyle}" Margin="289,65,0,0"  Width="80" IsReadOnly="True"/>
+                        <Button x:Name="btRefresh" Content="Refresh" HorizontalAlignment="Right" Margin="0,0,10,5" VerticalAlignment="Bottom" Width="50" MinHeight="20" Height="25" FontSize="9" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btRefresh_Click"/>
+                        <mah:ProgressRing x:Name="prStatus" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" IsActive="false"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Settings" mah:HeaderedControlHelper.HeaderFontSize="12">
+                    <Grid Background="{DynamicResource ColorPanel}">
+                        <Label Style="{StaticResource LabelStyle}" Content="Name" Margin="5,10,0,0"/>
+                        <TextBox x:Name="tbNameSet" Style="{StaticResource SetTextBoxStyle}" Margin="94,15,0,0" Width="130" mah:TextBoxHelper.Watermark="Name"/>
+                        <Button x:Name="btNameSet" Style="{StaticResource SetButtonStyle}" Content="Apply" Margin="229,15,0,0" Click="btNameSet_Click"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Address(64-bit)" Margin="5,37,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbAddress64Set" Style="{StaticResource SetTextBoxStyle}" Margin="94,40,0,0" Width="130" mah:TextBoxHelper.Watermark="Address 64-bit" KeyDown="tbAddress64Set_KeyDown"/>
+                        <Button x:Name="btAddress64Set" Style="{StaticResource SetButtonStyle}" Content="Apply" Margin="229,40,0,0" Click="btAddress64Set_Click"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Address(16-bit)" Margin="5,62,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbAddress16Set" Style="{StaticResource SetTextBoxStyle}" Margin="94,65,0,0"  Width="130" mah:TextBoxHelper.Watermark="Address 16-bit" KeyDown="tbAddress16Set_KeyDown"/>
+                        <Button x:Name="btAddress16Set" Style="{StaticResource SetButtonStyle}" Content="Apply" Margin="229,65,0,0" Click="btAddress16Set_Click"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Channel &amp; ID" Margin="5,87,0,0" FontSize="10"/>
+                        <mah:NumericUpDown x:Name="nudChannel" HorizontalAlignment="Left" Margin="94,90,0,0" Width="60" VerticalAlignment="Top" NumericInputMode="Decimal" MinHeight="20" Height="20" FontSize="9" HideUpDownButtons="True" Maximum="23" Minimum="11" mah:TextBoxHelper.Watermark="CH(11~23)"/>
+                        <mah:NumericUpDown x:Name="nudPanID" HorizontalAlignment="Left" Margin="162,90,0,0" Width="60" VerticalAlignment="Top" NumericInputMode="Decimal" MinHeight="0" Height="20" FontSize="9" HideUpDownButtons="True" Maximum="65535" Minimum="0" mah:TextBoxHelper.Watermark="ID(0-65535)"/>
+                        <Button x:Name="btChannelIDSet" Style="{StaticResource SetButtonStyle}" Content="Apply" Margin="229,90,0,0" Click="btChannelIDSet_Click"/>
+
+                        <Button x:Name="btSoftReset" Style="{StaticResource OptionButtonStyle}" Content="Soft Reset" Margin="290,60,0,0" Width="80" Click="btSoftReset_Click"/>
+                        <Button x:Name="btWrite" Style="{StaticResource OptionButtonStyle}" Content="Write Changes" Margin="290,87,0,0" Width="80" Click="btWrite_Click"/>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Network" mah:HeaderedControlHelper.HeaderFontSize="12">
+                    <Grid Background="{DynamicResource ColorPanel}">
+                        <ListView x:Name="lsvNetwork" Margin="10,30,10,10" ItemsSource="{Binding Source={x:Static local:Connection.GetInstance}, Path=XBeeNodeList, NotifyOnTargetUpdated=True}" ContextMenuOpening="lsvNetwork_ContextMenuOpening">
+                            <ListView.ContextMenu>
+                                <ContextMenu StaysOpen="true" Background="WhiteSmoke" FontSize="10">
+                                    <ContextMenu.BitmapEffect>
+                                        <BitmapEffectGroup/>
+                                    </ContextMenu.BitmapEffect>
+                                    <MenuItem x:Name="copyAddress64" Header="Copy Address(64-bit)" Click="copyAddress64_Click" IsEnabled="false"/>
+                                    <MenuItem x:Name="copyAddress16" Header="Copy Address(16-bit)" Click="copyAddress16_Click" IsEnabled="false"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <ListView.View>
+                                <GridView>
+                                    <GridView.ColumnHeaderContainerStyle>
+                                        <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource MahApps.Styles.Button.Chromeless}">
+                                            <Setter Property="TextElement.FontSize" Value="10"/>
+                                        </Style>
+                                    </GridView.ColumnHeaderContainerStyle>
+                                    <GridViewColumn Header="Name" Width="100" DisplayMemberBinding="{Binding Path=Name}"/>
+                                    <GridViewColumn Header="Address(64-bit)" Width="130" DisplayMemberBinding="{Binding Path=Address64, Converter={StaticResource HexConverter}}"/>
+                                    <GridViewColumn Header="Address(16-bit)" Width="80" DisplayMemberBinding="{Binding Path=Address16, Converter={StaticResource HexConverter}}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Button x:Name="btNetworkRefresh" Style="{StaticResource SetButtonStyle}" Content="Refresh" Margin="322,5,0,0" Height="19" Click="btNetworkRefresh_Click"/>
+                        <mah:ProgressRing x:Name="prNetwork" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" IsActive="false"/>
+                    </Grid>
+                </TabItem>
+            </mah:MetroTabControl>
+
+            <Border CornerRadius="5" Background="{StaticResource HatchBrush}" Margin="5,45,5,5" Visibility="{Binding Source={x:Static local:Connection.GetInstance}, Path=IsMainClosed, NotifyOnTargetUpdated=True, Converter={StaticResource BoolToVisConverter}}">
+                <Label Content="NO CONNECTION" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="OrangeRed"/>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" Background="{DynamicResource ColorControl}" Margin="5,5,5,5">
+            <Label Content="Proxy Connection" HorizontalAlignment="Left" VerticalAlignment="Top" Height="25" FontWeight="Bold"/>
+            <mah:MetroTabControl Margin="5,25,5,5">
+                <TabItem Header="Status" mah:HeaderedControlHelper.HeaderFontSize="12">
+                    <Grid Background="{DynamicResource ColorPanel}">
+                        <Label Style="{StaticResource LabelStyle}" Content="Name" Margin="5,10,0,0"/>
+                        <TextBox x:Name="tbNameProxy" Style="{StaticResource TextBoxStyle}" Margin="94,15,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Address(64-bit)" Margin="5,35,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbAddress64Proxy" Style="{StaticResource TextBoxStyle}" Margin="94,40,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Address(16-bit)" Margin="5,62,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbAddress16Proxy" Style="{StaticResource TextBoxStyle}" Margin="94,65,0,0"  Width="130" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Channel &amp; ID" Margin="5,87,0,0" FontSize="10"/>
+                        <TextBox x:Name="tbPANIDProxy" Style="{StaticResource TextBoxStyle}" Margin="94,90,0,0"  Width="60" IsReadOnly="True"/>
+                        <TextBox x:Name="tbChannelProxy" Style="{StaticResource TextBoxStyle}" Margin="164,90,0,0"  Width="60" IsReadOnly="True"/>
+                        <Label Style="{StaticResource LabelStyle}" Content="Port" Margin="247,4,0,0"/>
+                        <TextBox x:Name="tbPortProxy" Style="{StaticResource TextBoxStyle}" Margin="240,28,0,0"  Width="50" IsReadOnly="True"/>
+                        <Button x:Name="btRefreshProxy" Content="Refresh" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="50" MinHeight="20" Height="25" FontSize="9" mah:ControlsHelper.ContentCharacterCasing="Normal" Click="btRefreshProxy_Click"/>
+                        <mah:ProgressRing x:Name="prStatusProxy" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center" IsActive="false"/>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Telemetry" mah:HeaderedControlHelper.HeaderFontSize="12">
+                    <TabItem.Resources>
+                        <Style TargetType="mah:NumericUpDown">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <Setter Property="HideUpDownButtons" Value="True"/>
+                            <Setter Property="Width" Value="70"/>
+                            <Setter Property="MinHeight" Value="16"/>
+                            <Setter Property="Height" Value="20"/>
+                            <Setter Property="FontSize" Value="9"/>
+                        </Style>
+                    </TabItem.Resources>
+                    <Grid Background="{DynamicResource ColorPanel}">
+                        <CheckBox x:Name="tleMode" Content="Mode" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                        <CheckBox x:Name="tleHS" Content="HS" HorizontalAlignment="Left" Margin="80,10,0,0" VerticalAlignment="Top"/>
+                        <CheckBox x:Name="tlePC" Content="PC" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top"/>
+                        <ComboBox x:Name="tleState" HorizontalAlignment="Left" Margin="189,10,0,0" VerticalAlignment="Top" Width="110" Height="20" MinHeight="20" FontSize="9"
+                                  ItemsSource="{Binding Source={x:Static local:TelemetryHandler.TelemetryStateList}}" SelectedIndex="0"/>
+                        <mah:NumericUpDown x:Name="tleTilt_X" Margin="10,35,0,0" mah:TextBoxHelper.Watermark="Tilt_X" ToolTip="Tilt_X(deg)" Value="5.24"/>
+                        <mah:NumericUpDown x:Name="tleTilt_Y" Margin="10,60,0,0" mah:TextBoxHelper.Watermark="Tilt_Y" ToolTip="Tilt_Y(deg)" Value="3.86"/>
+                        <mah:NumericUpDown x:Name="tleRot_Z" Margin="10,85,0,0" mah:TextBoxHelper.Watermark="Rot_Z" ToolTip="Rot_Z(deg/sec)" Value="0.3"/>
+                        <mah:NumericUpDown x:Name="tleGPSAltitude" Margin="83,35,0,0" mah:TextBoxHelper.Watermark="GPS_Altitude" ToolTip="GPS_Altitude(m)" Value="253"/>
+                        <mah:NumericUpDown x:Name="tleGPSLatitude" Margin="83,60,0,0" mah:TextBoxHelper.Watermark="GPS_Latitude" ToolTip="GPS_Latitude(deg)" Value="37.41330"/>
+                        <mah:NumericUpDown x:Name="tleGPSLongitude" Margin="83,85,0,0" mah:TextBoxHelper.Watermark="GPS_Longitude" ToolTip="GPS_Longitude(deg)" Value="127.0017"/>
+                        <mah:NumericUpDown x:Name="tleAltitude" Margin="156,35,0,0" mah:TextBoxHelper.Watermark="Altitude" ToolTip="Altitude(m)" Value="252.7"/>
+                        <mah:NumericUpDown x:Name="tleAirSpeed" Margin="156,60,0,0" mah:TextBoxHelper.Watermark="Air Speed" ToolTip="Air Speed(m/s)" Value="7.5"/>
+                        <mah:NumericUpDown x:Name="tleTemperature" Margin="156,85,0,0" mah:TextBoxHelper.Watermark="Temperature" ToolTip="Temperature(celsius)" Value="27.3"/>
+                        <mah:NumericUpDown x:Name="tleVoltage" Margin="229,35,0,0" mah:TextBoxHelper.Watermark="Voltage" ToolTip="Voltage(V)" Value="5.1"/>
+                        <mah:NumericUpDown x:Name="tlePressure" Margin="229,60,0,0" mah:TextBoxHelper.Watermark="Pressure" ToolTip="Pressure(kPa)" Value="101.3"/>
+                        <Button x:Name="tleSend" Margin="229,85,0,0" Style="{StaticResource SetButtonStyle}" Width="70" Content="Send" MouseDown="tleSend_MouseDown" Click="tleSend_Click"/>
+                    </Grid>
+                </TabItem>
+            </mah:MetroTabControl>
+
+            <!--
+            <Border CornerRadius="5" Background="{StaticResource HatchBrush}" Margin="5,45,5,5" Visibility="{Binding Source={x:Static local:Connection.GetInstance}, Path=IsProxyClosed, NotifyOnTargetUpdated=True, Converter={StaticResource BoolToVisConverter}}">
+                <Label Content="NO CONNECTION" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="OrangeRed"/>
+            </Border>-->
+        </Grid>
+        <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+            <local:BindableListView x:Name="lsvDataLog" Margin="10,25,10,10" InlineList="{Binding Source={x:Static local:Connection.GetInstance}, Path=PacketList, NotifyOnTargetUpdated=True}" LayoutUpdated="lsvDataLog_LayoutUpdated" ContextMenuOpening="lsvDataLog_ContextMenuOpening">
+                <ListView.ContextMenu>
+                    <ContextMenu StaysOpen="true" Background="WhiteSmoke" FontSize="10">
+                        <ContextMenu.BitmapEffect>
+                            <BitmapEffectGroup/>
+                        </ContextMenu.BitmapEffect>
+                        <MenuItem x:Name="viewDetail" Header="ViewDetail" IsEnabled="false" Click="viewDetail_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem" BasedOn="{StaticResource MahApps.Styles.ListViewItem}">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                        <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridView.ColumnHeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader" BasedOn="{StaticResource MahApps.Styles.Button.Chromeless}">
+                                <Setter Property="TextElement.FontSize" Value="10"/>
+                            </Style>
+                        </GridView.ColumnHeaderContainerStyle>
+
+                        <GridViewColumn Header="No." Width="60" DisplayMemberBinding="{Binding Path=Number}"/>
+                        <GridViewColumn Header="Time" Width="80" DisplayMemberBinding="{Binding Path=Time}"/>
+                        <GridViewColumn Header="From(Address)" Width="80" DisplayMemberBinding="{Binding Path=Address, Converter={StaticResource HexConverter}}"/>
+                        <GridViewColumn Header="RSSI" Width="70" DisplayMemberBinding="{Binding Path=RSSI}"/>
+                        <GridViewColumn Header="Length" Width="50" DisplayMemberBinding="{Binding Path=Length}"/>
+                        <GridViewColumn Header="Data" Width="300" DisplayMemberBinding="{Binding Path=Data, Converter={StaticResource DataConverter}}"/>
+                    </GridView>
+                </ListView.View>
+            </local:BindableListView>
+            <ToggleButton x:Name="tbtPause" Style="{StaticResource ToggleButtonStyle}" Content="Pause" Margin="0,0,10,0" Width="80" Click="tbtPause_Click" IsChecked="False"/>
+            <Button x:Name="tbtClear" Style="{StaticResource SetButtonStyle}" Content="Clear" HorizontalAlignment="Right" Margin="0,0,95,0" Width="80" Click="tbtClear_Click"/>
+
+        </Grid>
+    </Grid>
+</Window>

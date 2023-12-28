@@ -1,0 +1,60 @@
+﻿<Window x:Class="InharoGCS.ViewDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hv="clr-namespace:HexView.Wpf;assembly=HexView.Wpf"
+        xmlns:local="clr-namespace:InharoGCS"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="ViewDetail" Height="350" Width="530" LayoutUpdated="Window_LayoutUpdated">
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="200" />
+                            <ColumnDefinition Width="120" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Address: "/>
+                    <TextBlock Text="{Binding ElementName=hexViewer, Path=SelectedAddress, StringFormat={}{0:X8}}"/>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="1">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Offset: "/>
+                    <TextBlock Text="{Binding ElementName=hexViewer, Path=Offset, StringFormat={}{0:X8}}"/>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="2">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Selection: "/>
+                    <TextBlock Text="{Binding ElementName=hexViewer, Path=SelectionStart, StringFormat={}{0:X8}}"/>
+                    <TextBlock Text=" - "/>
+                    <TextBlock Text="{Binding ElementName=hexViewer, Path=SelectionEnd, StringFormat={}{0:X8}}"/>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem Grid.Column="3">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Length: "/>
+                    <TextBlock Text="{Binding ElementName=hexViewer, Path=SelectionLength}"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+        <hv:HexViewer x:Name="hexViewer"
+            DataSource="{Binding Reader}"
+            Columns="{Binding RelativeSource={RelativeSource Self}, Path=MaxVisibleColumns}"/>
+    </DockPanel>
+</Window>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="BorderTile.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CommunicationWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ConnectionPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Dashboard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="LoggerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PlotControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BorderTile.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="CommunicationWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ConnectionPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dashboard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="LoggerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Component\Theme.Light.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Component\Theme.Dark.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PlotControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="StyleResource.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ViewDetail.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

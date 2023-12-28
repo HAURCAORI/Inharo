@@ -1,12 +1,250 @@
-﻿<Window x:Class="InharoGCS.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InharoGCS"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="InharoGCS.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="InharoGCS" Height="600" Width="1070" Loaded="Window_Loaded" WindowStyle="None"
+        MinHeight="500" MinWidth="800" Closing="Window_Closing" LayoutUpdated="Window_LayoutUpdated" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="MouseOverStyle" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ColorSelected}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid" Background="{DynamicResource ColorWindowBackground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Style="{DynamicResource StyleGrid}">
+            <StackPanel.Resources>
+                <Style x:Key="MenuButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MouseOverStyle}">
+                    <Setter Property="Width" Value="45"/>
+                    <Setter Property="Height" Value="45"/>
+                    <Setter Property="Margin" Value="5,2,5,2"/>
+                    <Setter Property="Foreground" Value="white"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate>
+                                <Grid Background="{TemplateBinding Background}">
+                                    <Border CornerRadius="1" BorderThickness="0.4" BorderBrush="{StaticResource ColorBorder}"/>
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </StackPanel.Resources>
+            <Border Height="20"/>
+            <Button Style="{StaticResource MenuButton}" Content="Dash."/>
+            <Button Content="Conn." Style="{StaticResource MenuButton}" Click="OpenConnection_Click"/>
+            <Button Content="Map" Style="{StaticResource MenuButton}"/>
+            <Border Height="Auto"/>
+            <Button Content="File" Style="{StaticResource MenuButton}"/>
+            <Button Content="Log" Style="{StaticResource MenuButton}" Click="OpenLogger_Click"/>
+            <Button Content="XBee" Style="{StaticResource MenuButton}" Click="OpenCommunication_Click"/>
+        </StackPanel>
+        <Grid x:Name="gridIcon"  Grid.Row="0" Grid.Column="0" Style="{DynamicResource StyleGrid}"/>
+        <Grid x:Name="TopBar" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{DynamicResource StyleGrid}" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Inharo GCS" Foreground="{DynamicResource FontColor}" FontSize="14"/>
+            </Grid>
+            <DockPanel Grid.Column="2" HorizontalAlignment="Right">
+                <DockPanel.Resources>
+                    <Style x:Key="WindowButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MouseOverStyle}">
+                        <Setter Property="DockPanel.Dock" Value="Right"/>
+                        <Setter Property="Width" Value="40"/>
+                        <Setter Property="Margin" Value="0,1,0,1"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DockPanel.Resources>
+
+                <Button x:Name="btnClose" Style="{StaticResource WindowButton}" Click="btnClose_Click">
+                    <Image Source="/Images/CloseButton.png" Width="16" Height="16"/>
+                </Button>
+                <Button x:Name="btnMaximize" Style="{StaticResource WindowButton}" Click="btnMaximize_Click">
+                    <Image Width="16" Height="16">
+                        <Image.Resources>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="/Images/MaximizeButton.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  Value="Maximized">
+                                        <Setter Property="Source" Value="/Images/NormalButton.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Resources>
+                    </Image>
+                </Button>
+                <Button x:Name="btnMinimize" Style="{StaticResource WindowButton}" Click="btnMinimize_Click">
+                    <Image Source="/Images/MinimizeButton.png" Width="16" Height="16"/>
+                </Button>
+                <mah:ToggleSwitch x:Name="ThemeSelector" OffContent="Light" OnContent="Dark" Foreground="{DynamicResource FontColor}" ContentDirection="LeftToRight" Width="114" Margin="0,0,15,0" Toggled="ThemeSelector_Toggled" IsOn="False"/>
+            </DockPanel>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="240"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="85"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.Resources>
+                        <local:BoolToStringConverter x:Key="ConvertConnectionString" FalseValue="Connected" TrueValue="Disconnected"/>
+                        <local:BoolToBrushConverter x:Key="ConvertConnectionBrush" FalseValue="LimeGreen" TrueValue="OrangeRed"/>
+                    </Grid.Resources>
+                    <local:BorderTile x:Name="TileClock" TileType="String" Title="Time" Text="00:00:00" TextColor="{DynamicResource FontColor}" Grid.Column="0"/>
+                    <local:BorderTile TileType="String" Title="Serial Port"
+                                      TextColor="{Binding Source={x:Static local:Connection.GetInstance}, Path=IsMainClosed, Converter={StaticResource ConvertConnectionBrush}}"
+                                      Text="{Binding Source={x:Static local:Connection.GetInstance}, Path=IsMainClosed, Converter={StaticResource ConvertConnectionString}}" Grid.Column="1"/>
+                    <local:BorderTile TileType="String" Title="State" Text="IDLE" TextColor="LimeGreen" Grid.Column="2"/>
+                    <local:BorderTile TileType="String" Title="Packets" Text="{Binding Source={x:Static local:Connection.GetInstance}, Path=ReceivedCount, NotifyOnTargetUpdated=True}" TextColor="{DynamicResource FontColor}" Grid.Column="3"/>
+                    <local:BorderTile TileType="String" Title="RSSI" Text="{Binding Source={x:Static local:Connection.GetInstance}, Path=LatestRSSI, NotifyOnTargetUpdated=True}" TextColor="{DynamicResource FontColor}" Grid.Column="4"/>
+                    <local:BorderTile x:Name="TileCPU" TileType="Percent" Title="CPU" Value="0" TextColor="{DynamicResource FontColor}" Grid.Column="5"/>
+                    <local:BorderTile x:Name="TileMemory" TileType="String" Title="RAM Available" Value="0" TextColor="{DynamicResource FontColor}" Grid.Column="6"/>
+                </Grid>
+
+                <Border Grid.Column="1" Grid.Row="1" Margin="5,5,5,5" Background="{DynamicResource ColorControl}" CornerRadius="3" BorderBrush="{DynamicResource ColorBorder}" BorderThickness="0.2">
+                    <Border.Resources>
+                        <Style TargetType="GroupBox" x:Key="gbStyle" BasedOn="{StaticResource MahApps.Styles.GroupBox}">
+                            <Setter Property="Margin" Value="3,3,3,3"/>
+                        </Style>
+                    </Border.Resources>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Style="{StaticResource gbStyle}"  Header="Telemetry" Grid.Row="0">
+                            <ScrollViewer>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="{x:Type Label}" >
+                                            <Setter Property="Height" Value="18"/>
+                                            <Setter Property="FontSize" Value="12"/>
+                                            <Setter Property="Padding" Value="12,2,0,0"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type TextBlock}" >
+                                            <Setter Property="TextDecorations" Value="Underline"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="FontSize" Value="13"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <StackPanel Grid.Column="0">
+                                        <Label Padding="4,2,0,0" Height="20">
+                                            <TextBlock Text="Info" />
+                                        </Label>
+                                        <Label Content="Team ID"/>
+                                        <Label Content="Mission Time"/>
+                                        <Label Content="GPS Time"/>
+                                        <Label Content="CMD Echo"/>
+                                        <Label Padding="4,2,0,0" Height="20">
+                                            <TextBlock Text="States"/>
+                                        </Label>
+                                        <Label Content="Heat Shield"/>
+                                        <Label Content="Parachute"/>
+                                        <Label Padding="4,2,0,0" Height="20">
+                                            <TextBlock Text="Parameters"/>
+                                        </Label>
+                                        <Label Content="Altitude"/>
+                                        <Label Content="Air Speed"/>
+                                        <Label Content="Temperature"/>
+                                        <Label Content="Voltage"/>
+                                        <Label Content="Pressure"/>
+                                        <Label Content="GPS Altitude"/>
+                                        <Label Content="GPS Latitude"/>
+                                        <Label Content="GPS Longitude"/>
+                                        <Label Content="GPS Sats"/>
+                                        <Label Content="Tilt X"/>
+                                        <Label Content="Tilt Y"/>
+                                        <Label Content="Rot Z"/>
+                                        <Label Padding="4,2,0,0" Height="20">
+                                            <TextBlock Text="Packets"/>
+                                        </Label>
+                                        <Label Content="Count"/>
+                                        <Label Content="Packet Loss"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Height="20"/>
+                                        <Label Content="0000"/>
+                                        <Label Content="12:00:00"/>
+                                        <Label Content="12:00:00"/>
+                                        <Label Content="IDLE"/>
+                                        <Label Height="20"/>
+                                        <Label Content="Enable"/>
+                                        <Label Content="Enable"/>
+                                        <Label Height="20"/>
+                                        <Label Content="0.0m"/>
+                                        <Label Content="0.0m/s"/>
+                                        <Label Content="0℃"/>
+                                        <Label Content="0.00V"/>
+                                        <Label Content="0.00kPa"/>
+                                        <Label Content="0.0m"/>
+                                        <Label Content="0.000deg"/>
+                                        <Label Content="0.0000deg"/>
+                                        <Label Content="0"/>
+                                        <Label Content="0.00deg"/>
+                                        <Label Content="0.00deg"/>
+                                        <Label Content="0.00deg/s"/>
+                                        <Label Height="20"/>
+                                        <Label Content="0"/>
+                                        <Label Content="0"/>
+                                    </StackPanel>
+                                </Grid>
+                            </ScrollViewer>
+                        </GroupBox>
+                        <GroupBox Style="{StaticResource gbStyle}" Header="Command" Grid.Row="1"/>
+                    </Grid>
+                </Border>
+
+
+                <Frame x:Name="MainFrame" Grid.Row="1" Source="Dashboard.xaml" Grid.Column="0" Margin="2,5,0,5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

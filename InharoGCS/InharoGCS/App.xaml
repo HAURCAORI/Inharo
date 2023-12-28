@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:InharoGCS"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="pack://application:,,,/Component/Theme.Dark.xaml"/>
     </Application.Resources>
 </Application>

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InharoGCS", "InharoGCS\InharoGCS.csproj", "{582E5EB6-FF58-4F15-BDD0-06FD51E25E57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InharoGCS", "InharoGCS\InharoGCS.csproj", "{616A648C-F511-46CE-BF8B-6471C46002E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{582E5EB6-FF58-4F15-BDD0-06FD51E25E57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{582E5EB6-FF58-4F15-BDD0-06FD51E25E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{582E5EB6-FF58-4F15-BDD0-06FD51E25E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{582E5EB6-FF58-4F15-BDD0-06FD51E25E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{616A648C-F511-46CE-BF8B-6471C46002E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{616A648C-F511-46CE-BF8B-6471C46002E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{616A648C-F511-46CE-BF8B-6471C46002E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{616A648C-F511-46CE-BF8B-6471C46002E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0F4464B6-DC9B-4B4A-9BA9-BF600C7EB2AA}
+		SolutionGuid = {301A48A3-F014-4AE9-BA9B-BC2D409C1115}
 	EndGlobalSection
 EndGlobal

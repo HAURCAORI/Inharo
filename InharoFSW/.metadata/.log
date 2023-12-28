@@ -16,3 +16,67 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-11-02 23:18:11.254
 !MESSAGE Indexed 'InharoFSW_F446RE' (22 sources, 82 headers) in 5.62 sec: 4,991 declarations; 26,444 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0064%)
+!SESSION 2023-11-09 17:17:25.273 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-09 17:17:50.117
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-09 17:17:50.135
+!MESSAGE Log4j2 initialized with config file D:\Project\Inharo\InharoFSW\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-09 17:18:05.384
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2023-11-09 17:55:35.004 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-09 17:55:44.605
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-09 17:55:44.606
+!MESSAGE Log4j2 initialized with config file D:\Project\Inharo\InharoFSW\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-09 17:55:53.405
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2023-11-09 17:59:14.235 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  D:\Project\Nucleo\Test\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 D:\Project\Nucleo\Test\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-09 17:59:23.320
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-09 17:59:23.321
+!MESSAGE Log4j2 initialized with config file D:\Project\Inharo\InharoFSW\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-09 17:59:33.214
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-11-09 17:59:39.822
+!MESSAGE Indexed 'Test' (22 sources, 109 headers) in 6.19 sec: 9,832 declarations; 41,592 references; 6 unresolved inclusions; 934 syntax errors; 1,258 unresolved names (2.4%)
+!SESSION 2023-11-23 19:40:22.534 -----------------------------------------------
+eclipse.buildId=Version 1.13.1
+java.version=17.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2023-11-23 19:40:45.787
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2023-11-23 19:40:45.799
+!MESSAGE Log4j2 initialized with config file D:\Project\Inharo\InharoFSW\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2023-11-23 19:41:04.137
+!MESSAGE Started RMI Server, listening on port 41337

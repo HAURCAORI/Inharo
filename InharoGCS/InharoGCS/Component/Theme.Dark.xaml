@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <!-- MahApps.Metro resource dictionaries. Make sure that all file names are Case Sensitive! -->
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+        <!-- Theme setting -->
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Dark.Blue.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Yu Gothic"/>
+    </Style>
+
+    <SolidColorBrush x:Key="ColorSelected" Color="#FF515151"/>
+    <SolidColorBrush x:Key="ColorGrid" Color="#FF161616"/>
+    <SolidColorBrush x:Key="ColorControl" Color="#FF161616"/>
+    <SolidColorBrush x:Key="ColorPanel" Color="#FF1B1B1B"/>
+    <SolidColorBrush x:Key="ColorBorder" Color="#FF797979"/>
+    <SolidColorBrush x:Key="ColorBar" Color="Black"/>
+    <SolidColorBrush x:Key="FontColor" Color="WhiteSmoke"/>
+    <LinearGradientBrush x:Key="ColorWindowBackground" EndPoint="0,1">
+        <GradientStop Color="#FF272729" Offset="0"/>
+        <GradientStop Color="#FF161517" Offset="1"/>
+    </LinearGradientBrush>
+
+
+    <Style x:Key="StyleGrid">
+        <Setter Property="Grid.Background" Value="{StaticResource ColorGrid}"/>
+    </Style>
+
+</ResourceDictionary>
